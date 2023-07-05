@@ -4,42 +4,70 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 
 const RegistrationScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Реєстрація</Text>
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder="Логін"></TextInput>
-        <TextInput
-          style={styles.input}
-          placeholder="Адреса електронної пошти"
-        ></TextInput>
-        <TextInput style={styles.input} placeholder="Пароль"></TextInput>
-      </View>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Зареєстуватися</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text>Вже є акаунт? Увійти</Text>
-      </TouchableOpacity>
-    </View>
+    <KeyboardAvoidingView
+      behavior="height"
+      enabled="true"
+      style={styles.wrapper}
+    >
+      <ImageBackground
+        source={require("../img/login-bg.jpg")}
+        resizeMode="cover"
+        style={styles.image}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>Реєстрація</Text>
+          <View style={styles.inputContainer}>
+            <TextInput style={styles.input} placeholder="Логін"></TextInput>
+            <TextInput
+              style={styles.input}
+              placeholder="Адреса електронної пошти"
+            ></TextInput>
+            <TextInput style={styles.input} placeholder="Пароль"></TextInput>
+          </View>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Зареєстуватися</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.loginRef}>Вже є акаунт? Увійти</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
+  },
+  container: {
     alignItems: "center",
-    padding: 12,
+    paddingRight: 12,
+    paddingLeft: 12,
+    paddingTop: 32,
+    paddingBottom: 144,
+    backgroundColor: "#FFF",
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "flex-end",
+    width: "100%",
+    height: "100%",
   },
   title: {
     fontWeight: 500,
     fontSize: 30,
     lineHeight: 35,
     letterSpacing: 0.01,
-    marginBottom:48,
+    marginBottom: 48,
   },
   inputContainer: {
     display: "flex",
@@ -65,7 +93,7 @@ const styles = StyleSheet.create({
     paddingRight: 32,
     borderRadius: 100,
     alignItems: "center",
-    marginBottom:24,
+    marginBottom: 24,
   },
   buttonText: {
     color: "#FFF",
@@ -73,7 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 18,
   },
-  logIn: {},
+  loginRef: {
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 18,
+    color: "#1B4371",
+  },
 });
 
 export default RegistrationScreen;
