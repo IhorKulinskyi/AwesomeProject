@@ -7,6 +7,7 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
 } from "react-native";
+import AddIcon from "../assets/addIcon.svg";
 
 const RegistrationScreen = () => {
   return (
@@ -21,6 +22,11 @@ const RegistrationScreen = () => {
         style={styles.image}
       >
         <View style={styles.container}>
+          <View style={styles.userPhoto}>
+            <TouchableOpacity style={styles.addIcon}>
+              <AddIcon width={30} height={30} fill={"#FF6C00"} />
+            </TouchableOpacity>
+          </View>
           <Text style={styles.title}>Реєстрація</Text>
           <View style={styles.inputContainer}>
             <TextInput style={styles.input} placeholder="Логін"></TextInput>
@@ -50,11 +56,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingRight: 12,
     paddingLeft: 12,
-    paddingTop: 32,
-    paddingBottom: 144,
+    paddingTop: 64,
+    paddingBottom: 64,
     backgroundColor: "#FFF",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
+    position: "relative",
+  },
+  userPhoto: {
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+    position: "absolute",
+    top: -60,
+  },
+  addIcon: {
+    position: "absolute",
+    bottom: 12.5,
+    right: -12.5,
   },
   image: {
     flex: 1,
@@ -67,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 35,
     letterSpacing: 0.01,
-    marginBottom: 48,
+    marginBottom: 32,
   },
   inputContainer: {
     display: "flex",
