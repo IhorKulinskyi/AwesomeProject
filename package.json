@@ -17,7 +17,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "metro": "^0.76.7",
     "metro-config": "^0.76.7",
+    "metro-core": "^0.76.7",
     "react-native-svg-transformer": "^1.0.0"
   },
   "private": true

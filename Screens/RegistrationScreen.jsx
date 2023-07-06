@@ -6,14 +6,17 @@ import {
   StyleSheet,
   ImageBackground,
   KeyboardAvoidingView,
+  Pressable,
 } from "react-native";
+import { useState } from "react";
 import AddIcon from "../assets/addIcon.svg";
 
 const RegistrationScreen = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <KeyboardAvoidingView
-      behavior="height"
-      enabled="true"
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.wrapper}
     >
       <ImageBackground
@@ -31,10 +34,27 @@ const RegistrationScreen = () => {
           <View style={styles.inputContainer}>
             <TextInput style={styles.input} placeholder="Логін"></TextInput>
             <TextInput
-              style={styles.input}
+              keyboardType="email-address"
               placeholder="Адреса електронної пошти"
+              style={styles.input}
             ></TextInput>
-            <TextInput style={styles.input} placeholder="Пароль"></TextInput>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                placeholder="Пароль"
+                secureTextEntry={!visible}
+                style={styles.input}
+              ></TextInput>
+              <Pressable
+                onPress={() => {
+                  setVisible((v) => !v);
+                }}
+                style={styles.showPassword}
+              >
+                <TouchableOpacity>
+                  <Text style={styles.showPasswordText}>Показати</Text>
+                </TouchableOpacity>
+              </Pressable>
+            </View>
           </View>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Зареєстуватися</Text>
@@ -53,6 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
+    flex: 0.65,
     alignItems: "center",
     paddingRight: 12,
     paddingLeft: 12,
@@ -96,6 +117,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     marginBottom: 48,
+  },
+  inputWrapper: {
+    width: "100%",
+    position: "relative",
+  },
+  showPassword: {
+    position: "absolute",
+    top: "36.5%",
+    left: "78%",
+  },
+  showPasswordText: {
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 18,
+    color: "#1B4371",
   },
   input: {
     borderWidth: 1,
