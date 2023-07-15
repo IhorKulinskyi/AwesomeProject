@@ -6,13 +6,59 @@ import {
   StyleSheet,
   ImageBackground,
   KeyboardAvoidingView,
-  Pressable,
+  Alert,
 } from "react-native";
 import { useState } from "react";
 import AddIcon from "../assets/addIcon.svg";
 
 const RegistrationScreen = () => {
   const [visible, setVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const resetForm = () => {
+    setEmail("");
+    setName("");
+    setPassword("");
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateName = (name) => {
+    const nameRegex = /^[a-zA-Z\s]*$/;
+    return nameRegex.test(name);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
+  const handleRegister = () => {
+    if (!validateEmail(email)) {
+      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+
+    if (!validateName(name)) {
+      Alert.alert(
+        "Invalid Name",
+        "Please enter a valid name (only alphabets and spaces allowed)."
+      );
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      Alert.alert("Password should be at least 8 characters");
+      return;
+    }
+    Alert.alert("Registration Success", "User registered successfully!");
+    resetForm();
+    console.log(`name: ${name}, email: ${email}`);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -32,31 +78,40 @@ const RegistrationScreen = () => {
           </View>
           <Text style={styles.title}>Реєстрація</Text>
           <View style={styles.inputContainer}>
-            <TextInput style={styles.input} placeholder="Логін"></TextInput>
             <TextInput
+              value={name}
+              onChangeText={setName}
+              style={styles.input}
+              placeholder="Логін"
+            ></TextInput>
+            <TextInput
+              value={email}
+              onChangeText={setEmail}
               keyboardType="email-address"
               placeholder="Адреса електронної пошти"
               style={styles.input}
             ></TextInput>
             <View style={styles.inputWrapper}>
               <TextInput
+                onChangeText={setPassword}
+                value={password}
                 placeholder="Пароль"
                 secureTextEntry={!visible}
                 style={styles.input}
               ></TextInput>
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setVisible((v) => !v);
                 }}
                 style={styles.showPassword}
               >
-                <TouchableOpacity>
-                  <Text style={styles.showPasswordText}>Показати</Text>
-                </TouchableOpacity>
-              </Pressable>
+                <Text style={styles.showPasswordText}>
+                  {visible ? "Сховати" : "Показати"}
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
             <Text style={styles.buttonText}>Зареєстуватися</Text>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -104,7 +159,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   title: {
-    fontWeight: 500,
+    fontWeight: "500",
     fontSize: 30,
     lineHeight: 35,
     letterSpacing: 0.01,
@@ -123,13 +178,14 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   showPassword: {
+    flex: 1,
     position: "absolute",
     top: "36.5%",
     left: "78%",
   },
   showPasswordText: {
     fontSize: 16,
-    fontWeight: 400,
+    fontWeight: "400",
     lineHeight: 18,
     color: "#1B4371",
   },
@@ -153,12 +209,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#FFF",
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 16,
     lineHeight: 18,
   },
   loginRef: {
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 16,
     lineHeight: 18,
     color: "#1B4371",
