@@ -7,8 +7,10 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
   Alert,
+  Platform,
+  Keyboard,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddIcon from "../assets/addIcon.svg";
 
 const RegistrationScreen = () => {
@@ -16,6 +18,32 @@ const RegistrationScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [contentOffset, setContentOffset] = useState(0);
+
+  const handleKeyboardDidShow = () => {
+    setContentOffset(-60);
+  };
+
+  const handleKeyboardDidHide = () => {
+    setContentOffset(0);
+  };
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      handleKeyboardDidShow
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      handleKeyboardDidHide
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const resetForm = () => {
     setEmail("");
@@ -63,6 +91,7 @@ const RegistrationScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
       style={styles.wrapper}
     >
       <ImageBackground
@@ -70,7 +99,7 @@ const RegistrationScreen = () => {
         resizeMode="cover"
         style={styles.image}
       >
-        <View style={styles.container}>
+        <View style={[styles.container, { top: contentOffset }]}>
           <View style={styles.userPhoto}>
             <TouchableOpacity style={styles.addIcon}>
               <AddIcon width={30} height={30} fill={"#FF6C00"} />
@@ -115,7 +144,7 @@ const RegistrationScreen = () => {
             <Text style={styles.buttonText}>Зареєстуватися</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.loginRef}>Вже є акаунт? Увійти</Text>
+            <Text style={styles.loginRef}>Вже є акаунт? <Text style={styles.loginRefLink}>Увійти</Text></Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -159,6 +188,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   title: {
+    fontFamily:'Roboto',
     fontWeight: "500",
     fontSize: 30,
     lineHeight: 35,
@@ -184,6 +214,7 @@ const styles = StyleSheet.create({
     left: "78%",
   },
   showPasswordText: {
+    fontFamily:'Roboto',
     fontSize: 16,
     fontWeight: "400",
     lineHeight: 18,
@@ -209,16 +240,21 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#FFF",
+    fontFamily:'Roboto',
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 18,
   },
   loginRef: {
+    fontFamily:'Roboto',
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 18,
     color: "#1B4371",
   },
+  loginRefLink: {
+    textDecorationLine: "underline",
+  }
 });
 
 export default RegistrationScreen;

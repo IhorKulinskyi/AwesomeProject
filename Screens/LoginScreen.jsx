@@ -90,7 +90,7 @@ const LoginScreen = () => {
             <Text style={styles.buttonText}>Увійти</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.loginRef}>Немає акаунту? Зареєструватися</Text>
+            <Text style={styles.loginRef}>Немає акаунту?<Text style={styles.loginRefLink}>Зареєструватися</Text> </Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -179,6 +179,9 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: "#1B4371",
   },
+  loginRefLink: {
+    textDecorationLine: "underline",
+  }
 });
 
 export default LoginScreen;
