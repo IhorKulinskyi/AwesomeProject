@@ -9,9 +9,10 @@ import {
   Alert,
   Platform,
   Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useState, useEffect } from "react";
-import AddIcon from "../assets/addIcon.svg";
+import { Ionicons } from "@expo/vector-icons";
 
 const RegistrationScreen = () => {
   const [visible, setVisible] = useState(false);
@@ -89,66 +90,74 @@ const RegistrationScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
-      style={styles.wrapper}
-    >
-      <ImageBackground
-        source={require("../img/login-bg.jpg")}
-        resizeMode="cover"
-        style={styles.image}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
+        style={styles.wrapper}
       >
-        <View style={[styles.container, { top: contentOffset }]}>
-          <View style={styles.userPhoto}>
-            <TouchableOpacity style={styles.addIcon}>
-              <AddIcon width={30} height={30} fill={"#FF6C00"} />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.title}>Реєстрація</Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={name}
-              onChangeText={setName}
-              style={styles.input}
-              placeholder="Логін"
-            ></TextInput>
-            <TextInput
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              placeholder="Адреса електронної пошти"
-              style={styles.input}
-            ></TextInput>
-            <View style={styles.inputWrapper}>
-              <TextInput
-                onChangeText={setPassword}
-                value={password}
-                placeholder="Пароль"
-                secureTextEntry={!visible}
-                style={styles.input}
-              ></TextInput>
-              <TouchableOpacity
-                onPress={() => {
-                  setVisible((v) => !v);
-                }}
-                style={styles.showPassword}
-              >
-                <Text style={styles.showPasswordText}>
-                  {visible ? "Сховати" : "Показати"}
-                </Text>
+        <ImageBackground
+          source={require("../img/login-bg.jpg")}
+          resizeMode="cover"
+          style={styles.image}
+        >
+          <View style={[styles.container, { top: contentOffset }]}>
+            <View style={styles.userPhoto}>
+              <TouchableOpacity style={styles.addIcon}>
+                <Ionicons
+                  name="ios-add-circle-outline"
+                  size={30}
+                  color="#FF6C00"
+                />
               </TouchableOpacity>
             </View>
+            <Text style={styles.title}>Реєстрація</Text>
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={name}
+                onChangeText={setName}
+                style={styles.input}
+                placeholder="Логін"
+              ></TextInput>
+              <TextInput
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                placeholder="Адреса електронної пошти"
+                style={styles.input}
+              ></TextInput>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  onChangeText={setPassword}
+                  value={password}
+                  placeholder="Пароль"
+                  secureTextEntry={!visible}
+                  style={styles.input}
+                ></TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible((v) => !v);
+                  }}
+                  style={styles.showPassword}
+                >
+                  <Text style={styles.showPasswordText}>
+                    {visible ? "Сховати" : "Показати"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <TouchableOpacity style={styles.button} onPress={handleRegister}>
+              <Text style={styles.buttonText}>Зареєстуватися</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.loginRef}>
+                Вже є акаунт? <Text style={styles.loginRefLink}>Увійти</Text>
+              </Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.button} onPress={handleRegister}>
-            <Text style={styles.buttonText}>Зареєстуватися</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.loginRef}>Вже є акаунт? <Text style={styles.loginRefLink}>Увійти</Text></Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </KeyboardAvoidingView>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
   addIcon: {
     position: "absolute",
     bottom: 12.5,
-    right: -12.5,
+    right: -16,
   },
   image: {
     flex: 1,
@@ -188,7 +197,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   title: {
-    fontFamily:'Roboto',
+    fontFamily: "Roboto",
     fontWeight: "500",
     fontSize: 30,
     lineHeight: 35,
@@ -214,7 +223,7 @@ const styles = StyleSheet.create({
     left: "78%",
   },
   showPasswordText: {
-    fontFamily:'Roboto',
+    fontFamily: "Roboto",
     fontSize: 16,
     fontWeight: "400",
     lineHeight: 18,
@@ -240,13 +249,13 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#FFF",
-    fontFamily:'Roboto',
+    fontFamily: "Roboto",
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 18,
   },
   loginRef: {
-    fontFamily:'Roboto',
+    fontFamily: "Roboto",
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 18,
@@ -254,7 +263,7 @@ const styles = StyleSheet.create({
   },
   loginRefLink: {
     textDecorationLine: "underline",
-  }
+  },
 });
 
 export default RegistrationScreen;
