@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useState, useEffect } from "react";
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons";
 
 const RegistrationScreen = () => {
@@ -21,6 +22,8 @@ const RegistrationScreen = () => {
   const [password, setPassword] = useState("");
 
   const [contentOffset, setContentOffset] = useState(0);
+
+  const navigation = useNavigation();
 
   const handleKeyboardDidShow = () => {
     setContentOffset(-60);
@@ -87,6 +90,7 @@ const RegistrationScreen = () => {
     Alert.alert("Registration Success", "User registered successfully!");
     resetForm();
     console.log(`name: ${name}, email: ${email}`);
+    navigation.navigate("Home");
   };
 
   return (
@@ -149,7 +153,11 @@ const RegistrationScreen = () => {
             <TouchableOpacity style={styles.button} onPress={handleRegister}>
               <Text style={styles.buttonText}>Зареєстуватися</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Login");
+              }}
+            >
               <Text style={styles.loginRef}>
                 Вже є акаунт? <Text style={styles.loginRefLink}>Увійти</Text>
               </Text>

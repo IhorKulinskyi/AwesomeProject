@@ -5,14 +5,18 @@ import {
   Octicons,
   Feather,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import userPhoto from "../img/User.jpg";
 
 const Home = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.postsTitle}>Публікації</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <Feather
             style={styles.logOutIcon}
             name="log-out"
@@ -34,12 +38,20 @@ const Home = () => {
         <TouchableOpacity>
           <SimpleLineIcons name="grid" size={24} color="#212121CC" />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("CreatePost");
+          }}
+        >
           <View style={styles.addIconWrapper}>
             <Ionicons name="add" size={24} color="white" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Profile");
+          }}
+        >
           <Octicons name="person" size={24} color="#212121CC" />
         </TouchableOpacity>
       </View>
@@ -60,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: 0.5,
-    borderBottomColor:"#0000004D",
+    borderBottomColor: "#0000004D",
   },
   postsTitle: {
     flex: 1,
@@ -94,7 +106,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingTop: 10,
     borderTopWidth: 0.5,
-    borderTopColor:"#0000004D",
+    borderTopColor: "#0000004D",
   },
   addIconWrapper: {
     borderRadius: 25,

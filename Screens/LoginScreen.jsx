@@ -6,14 +6,17 @@ import {
   StyleSheet,
   ImageBackground,
   KeyboardAvoidingView,
-  Alert
+  Alert,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
 const LoginScreen = () => {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigation = useNavigation();
 
   const resetForm = () => {
     setEmail("");
@@ -43,6 +46,7 @@ const LoginScreen = () => {
     Alert.alert("Login Success", "User logedd in successfully!");
     resetForm();
     console.log(`email: ${email}`);
+    navigation.navigate("Home");
   };
 
   return (
@@ -85,12 +89,18 @@ const LoginScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
-
           <TouchableOpacity style={styles.button} onPress={handleLogIn}>
             <Text style={styles.buttonText}>Увійти</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.loginRef}>Немає акаунту?<Text style={styles.loginRefLink}>Зареєструватися</Text> </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Register");
+            }}
+          >
+            <Text style={styles.loginRef}>
+              Немає акаунту?{" "}
+              <Text style={styles.loginRefLink}>Зареєструватися</Text>
+            </Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -181,7 +191,7 @@ const styles = StyleSheet.create({
   },
   loginRefLink: {
     textDecorationLine: "underline",
-  }
+  },
 });
 
 export default LoginScreen;
