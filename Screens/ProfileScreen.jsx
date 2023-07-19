@@ -7,13 +7,7 @@ import {
   Image,
 } from "react-native";
 import ProfileImg from "../img/ProfileImg.jpg";
-import {
-  AntDesign,
-  Ionicons,
-  SimpleLineIcons,
-  Octicons,
-  Feather,
-} from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
@@ -39,28 +33,7 @@ const ProfileScreen = () => {
         </View>
         <Text style={styles.title}>UserName</Text>
       </View>
-      {/* <View style={styles.footer}>
-        <TouchableOpacity onPress={()=>{navigation.navigate("Home")}}>
-          <SimpleLineIcons name="grid" size={24} color="#212121CC" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("CreatePost");
-          }}
-        >
-          <View style={styles.addIconWrapper}>
-            <Ionicons name="add" size={24} color="white" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Profile");
-          }}
-        >
-          <Octicons name="person" size={24} color="#212121CC" />
-        </TouchableOpacity>
-      </View> */}
-    </ImageBackground>    
+    </ImageBackground>
   );
 };
 
@@ -120,7 +93,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderTopWidth: 0.5,
     borderTopColor: "#0000004D",
-    backgroundColor:"#FFF"
+    backgroundColor: "#FFF",
   },
   addIconWrapper: {
     borderRadius: 25,

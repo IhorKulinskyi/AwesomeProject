@@ -1,30 +1,9 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import {
-  Ionicons,
-  SimpleLineIcons,
-  Octicons,
-  Feather,
-} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import userPhoto from "../img/User.jpg";
-import BottomTab from "../Components/BottomTab";
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.postsTitle}>Публікації</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Feather
-            style={styles.logOutIcon}
-            name="log-out"
-            size={24}
-            color="#BDBDBD"
-          />
-        </TouchableOpacity>
-      </View>
       <View style={styles.mainContent}>
         <View style={styles.useInfo}>
           <Image source={userPhoto} />
@@ -34,27 +13,6 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
-      {/* <View style={styles.footer}>
-        <TouchableOpacity>
-          <SimpleLineIcons name="grid" size={24} color="#212121CC" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("CreatePost");
-          }}
-        >
-          <View style={styles.addIconWrapper}>
-            <Ionicons name="add" size={24} color="white" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("ProfileScreen");
-          }}
-        >
-          <Octicons name="person" size={24} color="#212121CC" />
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };
@@ -65,28 +23,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     backgroundColor: "#FFF",
-  },
-  header: {
-    paddingTop: 50,
-    paddingBottom: 10,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#0000004D",
-  },
-  postsTitle: {
-    flex: 1,
-    textAlign: "center",
-    fontFamily: "Roboto",
-    fontWeight: "500",
-    fontSize: 17,
-    lineHeight: 22,
-    letterSpacing: -0.4,
-    color: "#212121",
-  },
-  logOutIcon: {
-    marginLeft: -24,
   },
   mainContent: {
     flex: 1,

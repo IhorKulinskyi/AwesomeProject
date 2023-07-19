@@ -90,7 +90,7 @@ const RegistrationScreen = () => {
     Alert.alert("Registration Success", "User registered successfully!");
     resetForm();
     console.log(`name: ${name}, email: ${email}`);
-    navigation.navigate("Home");
+    navigation.navigate("HomeScreen");
   };
 
   return (

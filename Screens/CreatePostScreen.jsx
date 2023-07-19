@@ -8,16 +8,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import {
-  Ionicons,
-  AntDesign,
-  MaterialIcons,
-  Feather,
-} from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
 
 const CreatePostsScreen = () => {
-  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -26,17 +19,6 @@ const CreatePostsScreen = () => {
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
       >
         <View style={styles.container}>
-          <View style={styles.header}>
-            <TouchableOpacity
-              style={styles.arrowBackIcon}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-            <Text style={styles.postsTitle}>Створити публікацію</Text>
-          </View>
           <View style={styles.mainContent}>
             <View style={styles.photoPlace}>
               <TouchableOpacity style={styles.photoIconWrapper}>
@@ -86,28 +68,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     backgroundColor: "#FFF",
-  },
-  header: {
-    paddingTop: 50,
-    paddingBottom: 10,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#0000004D",
-  },
-  postsTitle: {
-    flex: 0.9,
-    textAlign: "center",
-    fontFamily: "Roboto",
-    fontWeight: "500",
-    fontSize: 17,
-    lineHeight: 22,
-    letterSpacing: -0.4,
-    color: "#212121",
-  },
-  arrowBackIcon: {
-    marginRight: -48,
   },
   mainContent: {
     flex: 1,
@@ -178,8 +138,8 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   footer: {
-    display: "flex",
-    justifyContent: "center",
+    // display: "flex",
+    // justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 80,
     paddingBottom: 20,
