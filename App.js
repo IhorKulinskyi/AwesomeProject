@@ -4,8 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import RegistrationScreen from "./Screens/RegistrationScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import CreatePostScreen from "./Screens/CreatePostScreen";
-import Home from "./Screens/Home";
-import Profile from "./Screens/Profile";
+import Home from "./Screens/HomeScreen";
+import Profile from "./Screens/ProfileScreen";
+import BottomTab from "./Components/BottomTab";
 
 export default function App() {
   const MainStack = createStackNavigator();
@@ -14,7 +15,7 @@ export default function App() {
       <MainStack.Navigator initialRouteName="Login">
         <MainStack.Screen
           name="Home"
-          component={Home}
+          component={BottomTab}
           options={{
             headerShown: false,
           }}
@@ -33,7 +34,7 @@ export default function App() {
             headerShown: false,
           }}
         />
-        <MainStack.Screen
+        {/* <MainStack.Screen
           name="CreatePost"
           component={CreatePostScreen}
           options={{
@@ -46,7 +47,7 @@ export default function App() {
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );

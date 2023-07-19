@@ -16,7 +16,7 @@ import {
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const Profile = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   return (
     <ImageBackground
@@ -39,7 +39,7 @@ const Profile = () => {
         </View>
         <Text style={styles.title}>UserName</Text>
       </View>
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <TouchableOpacity onPress={()=>{navigation.navigate("Home")}}>
           <SimpleLineIcons name="grid" size={24} color="#212121CC" />
         </TouchableOpacity>
@@ -59,7 +59,7 @@ const Profile = () => {
         >
           <Octicons name="person" size={24} color="#212121CC" />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </ImageBackground>    
   );
 };
@@ -133,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default ProfileScreen;

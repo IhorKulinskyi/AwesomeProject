@@ -43,7 +43,7 @@ const LoginScreen = () => {
       return;
     }
 
-    Alert.alert("Login Success", "User logedd in successfully!");
+    // Alert.alert("Login Success", "User logedd in successfully!");
     resetForm();
     console.log(`email: ${email}`);
     navigation.navigate("Home");

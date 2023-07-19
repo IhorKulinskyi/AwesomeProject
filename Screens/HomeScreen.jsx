@@ -6,10 +6,10 @@ import {
   Feather,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import userPhoto from "../img/User.jpg";
+import BottomTab from "../Components/BottomTab";
 
-const Home = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
 
   return (
@@ -34,7 +34,7 @@ const Home = () => {
           </View>
         </View>
       </View>
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <TouchableOpacity>
           <SimpleLineIcons name="grid" size={24} color="#212121CC" />
         </TouchableOpacity>
@@ -49,12 +49,12 @@ const Home = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Profile");
+            navigation.navigate("ProfileScreen");
           }}
         >
           <Octicons name="person" size={24} color="#212121CC" />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
+    backgroundColor: "#FFF",
   },
   header: {
     paddingTop: 50,
@@ -119,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;

@@ -30,7 +30,7 @@ const CreatePostsScreen = () => {
             <TouchableOpacity
               style={styles.arrowBackIcon}
               onPress={() => {
-                navigation.navigate("Home");
+                navigation.goBack();
               }}
             >
               <Ionicons name="arrow-back" size={24} color="black" />
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
+    backgroundColor: "#FFF",
   },
   header: {
     paddingTop: 50,
