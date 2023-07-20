@@ -1,9 +1,12 @@
 import "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Ionicons } from "@expo/vector-icons";
 import RegistrationScreen from "./Screens/RegistrationScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import BottomTab from "./Components/BottomTab";
+import CommentsScreen from "./Screens/CommentsScreen";
 
 export default function App() {
   const MainStack = createStackNavigator();
@@ -30,6 +33,33 @@ export default function App() {
           options={{
             headerShown: false,
           }}
+        />
+        <MainStack.Screen
+          name="Comments"
+          component={CommentsScreen}
+          options={({ navigation }) => ({
+            headerTitle:"Коментарі",
+            headerLeftContainerStyle: {
+              paddingLeft: 20,
+            },
+            headerTitleStyle: {
+              paddingRight: 20,
+            },
+            headerStyle:{
+              borderBottomWidth: 0.5,
+              borderBottomColor: "#0000004D",
+            },
+            headerTitleAlign: "center",
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <Ionicons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
         />
       </MainStack.Navigator>
     </NavigationContainer>
