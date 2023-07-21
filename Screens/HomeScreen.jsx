@@ -6,15 +6,14 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { EvilIcons, Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import userPhoto from "../img/User.jpg";
-import PostImage from "../img/PostImage1.jpg";
 import { FlatList } from "react-native-gesture-handler";
 import { postsArray } from "../data/posts";
 import Post from "../Components/Post";
 
 const HomeScreen = () => {
+  const route = useRoute();
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -33,10 +32,8 @@ const HomeScreen = () => {
             renderItem={({ item }) => (
               <Post
                 nav={navigation}
-                img={item.img}
-                caption={item.title}
-                location={item.location}
-                comments={item.comments}
+                postData={item}
+                route={route}
               />
             )}
             keyExtractor={(item) => item.id}

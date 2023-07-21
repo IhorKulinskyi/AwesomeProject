@@ -1,28 +1,44 @@
-import { StyleSheet, Text, Image, View } from "react-native";
-import React from "react";
-import { AntDesign } from "@expo/vector-icons";
-import PostImage from "../img/PostImage1.jpg";
-import { TextInput } from "react-native-gesture-handler";
 import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  SafeAreaView,
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Keyboard,
+  FlatList,
 } from "react-native";
+import React from "react";
+import { AntDesign } from "@expo/vector-icons";
+import { TextInput } from "react-native-gesture-handler";
+import Comment from "../Components/Comment";
 
-const CommentsScreen = () => {
+const CommentsScreen = ({ route }) => {
+  const { data } = route.params;
+  const comments = data.commentsTexts;
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-    //   keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
-            <Image source={PostImage} />
+            <Image source={data.img} />
           </View>
-
+          <View style={{flex:1}}>
+            <SafeAreaView>
+              <FlatList
+                contentContainerStyle={styles.commentContainer}
+                data={comments}
+                renderItem={({ item, index }) => <Comment data={item} index={index}/>}
+                keyExtractor={(item) => item.id}
+              />
+            </SafeAreaView>
+          </View>
           <View style={styles.inputWrapper}>
             <TextInput style={styles.input} placeholder="Коментувати..." />
             <TouchableOpacity style={styles.sendButton}>
@@ -40,10 +56,9 @@ export default CommentsScreen;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    // width: "100%",
   },
   imageContainer: {
-    flex: 1,
+    flex: 0.8,
   },
   container: {
     flex: 1,
@@ -55,7 +70,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     justifyContent: "space-between",
   },
+  commentContainer: {
+    flexDirection: "column",
+    gap: 20,
+  },
   inputWrapper: {
+    // flex:1,
     position: "relative",
     width: "100%",
   },

@@ -6,15 +6,16 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
-  FlatList
+  FlatList,
 } from "react-native";
 import ProfileImg from "../img/ProfileImg.jpg";
 import { AntDesign, Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { postsArray } from "../data/posts";
 import Post from "../Components/Post";
 
 const ProfileScreen = () => {
+  const route = useRoute();
   const navigation = useNavigation();
   return (
     <ImageBackground
@@ -43,10 +44,8 @@ const ProfileScreen = () => {
             renderItem={({ item }) => (
               <Post
                 nav={navigation}
-                img={item.img}
-                caption={item.title}
-                location={item.location}
-                comments={item.comments}
+                postData={item}
+                route={route}
               />
             )}
             keyExtractor={(item) => item.id}
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
   postContainer: {
     flexDirection: "column",
     gap: 20,
-    paddingBottom:20,
+    paddingBottom: 20,
   },
   userPhoto: {
     width: 120,
