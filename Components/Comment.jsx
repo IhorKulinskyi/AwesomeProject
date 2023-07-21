@@ -13,7 +13,14 @@ const Comment = ({ data, index }) => {
       <View style={styles.userAvatarContainer}>
         <Image source={userAvatar} style={styles.userAvatar} />
       </View>
-      <View style={styles.commentBody}>
+      <View
+        style={[
+          styles.commentBody,
+          index % 2
+            ? { borderTopLeftRadius: 6, borderTopRightRadius: 0 }
+            : { borderTopLeftRadius: 0, borderTopRightRadius: 6 },
+        ]}
+      >
         <Text style={styles.commentText}>{text}</Text>
         <Text
           style={[
@@ -34,38 +41,39 @@ const styles = StyleSheet.create({
   commentContainer: {
     paddingHorizontal: 10,
     flexDirection: "row",
-    // justifyContent:"space-between",
     gap: 10,
-    // width: "100%",
-    borderWidth: 2,
   },
   commentBody: {
-    width: "100%",
+    width: "91%",
     flexDirection: "column",
-    borderWidth: 1,
-    padding: 10,
-    // flex:1,
+    padding: 15,
+    backgroundColor: "#00000008",
+    borderRadius: 6,
   },
   userAvatarContainer: {
     width: 28,
     height: 28,
-    // flex: 0.2,
-    borderWidth: 1,
-    borderColor: "orange",
   },
   userAvatar: {
     width: 28,
-    resizeMode:'cover',
+    resizeMode: "cover",
   },
   dateTime: {
     flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "green",
-    flex:1,
+    flex: 1,
+    color: "#BDBDBD",
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: 10,
+    lineHeight: 11,
   },
   commentText: {
-    borderWidth: 1,
-    borderColor: "red",
-    flex:1,
+    flex: 1,
+    color: "#212121",
+    fontFamily: "Roboto",
+    fontSize: 13,
+    fontWeight: "400",
+    lineHeight: 18,
+    marginBottom: 8,
   },
 });

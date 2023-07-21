@@ -19,35 +19,37 @@ const CommentsScreen = ({ route }) => {
   const { data } = route.params;
   const comments = data.commentsTexts;
   return (
-    <KeyboardAvoidingView
-      style={styles.wrapper}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -249}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image source={data.img} />
-          </View>
-          <View style={{flex:1}}>
-            <SafeAreaView>
-              <FlatList
-                contentContainerStyle={styles.commentContainer}
-                data={comments}
-                renderItem={({ item, index }) => <Comment data={item} index={index}/>}
-                keyExtractor={(item) => item.id}
-              />
-            </SafeAreaView>
-          </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image source={data.img} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <SafeAreaView>
+            <FlatList
+              contentContainerStyle={styles.commentContainer}
+              data={comments}
+              renderItem={({ item, index }) => (
+                <Comment data={item} index={index} />
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          </SafeAreaView>
+        </View>
+        <KeyboardAvoidingView
+          style={styles.wrapper}
+          behavior={Platform.OS === "ios" ? "padding" : "null"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -250}
+        >
           <View style={styles.inputWrapper}>
             <TextInput style={styles.input} placeholder="Коментувати..." />
             <TouchableOpacity style={styles.sendButton}>
               <AntDesign name="arrowup" size={24} color="#FFF" />
             </TouchableOpacity>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -55,7 +57,8 @@ export default CommentsScreen;
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flex: 0.15,
+    width: "100%",
   },
   imageContainer: {
     flex: 0.8,
@@ -78,6 +81,7 @@ const styles = StyleSheet.create({
     // flex:1,
     position: "relative",
     width: "100%",
+    // paddingBottom: 40,
   },
   input: {
     borderWidth: 1,
