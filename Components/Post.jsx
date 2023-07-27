@@ -56,8 +56,15 @@ const Post = ({ route, nav, postData }) => {
           )}
         </View>
         <View style={styles.commentsView}>
-          <Feather name="map-pin" size={20} color="#BDBDBD" />
-          <Text>{location}</Text>
+          <TouchableOpacity
+            style={styles.location}
+            onPress={() => {
+              nav.navigate("Map");
+            }}
+          >
+            <Feather name="map-pin" size={20} color="#BDBDBD" />
+            <Text>{location}</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -88,4 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 5,
   },
+  location:{
+    flexDirection: "row", gap: 5, alignItems: "flex-end"
+  }
 });
