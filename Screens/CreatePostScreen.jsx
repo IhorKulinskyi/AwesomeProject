@@ -22,6 +22,7 @@ const CreatePostsScreen = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState(undefined);
+  const [locationName, setLocationName] = useState("");
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -39,6 +40,13 @@ const CreatePostsScreen = () => {
     })();
   }, []);
 
+  const reset = () => {
+    setName("");
+    setPhoto(undefined);
+    setLocation(null);
+    setLocationName("");
+  };
+
   const handlePost = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -48,8 +56,8 @@ const CreatePostsScreen = () => {
 
     let location = await Location.getCurrentPositionAsync({});
     setLocation(location);
-    setName("");
-    setPhoto(undefined);
+    reset();
+    console.log({ name, photo, location, locationName });
     navigation.navigate("Home");
   };
 
@@ -132,6 +140,8 @@ const CreatePostsScreen = () => {
                 <TextInput
                   style={[styles.input, { paddingLeft: 28 }]}
                   placeholder="Місцевість..."
+                  value={locationName}
+                  onChangeText={setLocationName}
                 ></TextInput>
                 <Feather
                   style={styles.mapPinIcon}
@@ -162,8 +172,7 @@ const CreatePostsScreen = () => {
             <TouchableOpacity
               style={styles.deleteIconWrapper}
               onPress={() => {
-                setPhoto(undefined);
-                setName("");
+                reset();
               }}
             >
               <AntDesign name="delete" size={24} color="black" />

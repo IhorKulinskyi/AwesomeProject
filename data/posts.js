@@ -3,7 +3,16 @@ export const postsArray = [
     id: 1,
     img: require("../img/PostImage1.jpg"),
     title: "Ліс",
-    location: "Ukraine",
+    location: {
+      name: "Ukraine",
+      title: "Ліс",
+      coords: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+    },
     comments: 0,
     likes: 153,
     commentsTexts: [
@@ -34,7 +43,16 @@ export const postsArray = [
     id: 2,
     img: require("../img/PostImage2.jpg"),
     title: "Захід на Чорному морі",
-    location: "Ukraine",
+    location: {
+      name: "Ukraine",
+      title: "Захід на Чорному морі",
+      coords: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+    },
     comments: 3,
     likes: 200,
     commentsTexts: [
@@ -65,7 +83,16 @@ export const postsArray = [
     id: 3,
     img: require("../img/PostImage3.jpg"),
     title: "Старий будиночок у Венеції",
-    location: "Italy",
+    location: {
+      name: "Italy",
+      title: "Старий будиночок у Венеції",
+      coords: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+    },
     comments: 50,
     likes: 200,
     commentsTexts: [

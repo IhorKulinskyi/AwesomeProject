@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { EvilIcons, Feather, AntDesign } from "@expo/vector-icons";
 
 const Post = ({ route, nav, postData }) => {
-  const { img, caption, comments, location, likes } = postData;
+  const { img, title, comments, location, likes } = postData;
 
   function getColor(amount) {
     if (!amount) {
@@ -20,8 +20,8 @@ const Post = ({ route, nav, postData }) => {
   return (
     <View style={styles.postContainer}>
       <View>
-        <Image source={img} />
-        <Text>{caption}</Text>
+        <Image style={styles.image} source={img} />
+        <Text>{title}</Text>
       </View>
       <View style={styles.postActions}>
         <View style={styles.reactions}>
@@ -59,11 +59,14 @@ const Post = ({ route, nav, postData }) => {
           <TouchableOpacity
             style={styles.location}
             onPress={() => {
-              nav.navigate("Map");
+              nav.navigate("Map", {
+                screen: `${route.name}`,
+                data: location,
+              });
             }}
           >
             <Feather name="map-pin" size={20} color="#BDBDBD" />
-            <Text>{location}</Text>
+            <Text>{location.name}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -77,6 +80,9 @@ const styles = StyleSheet.create({
   postContainer: {
     flexDirection: "column",
     alignItems: "center",
+  },
+  image: {
+    marginBottom: 5,
   },
   commentsView: {
     flexDirection: "row",
@@ -95,7 +101,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 5,
   },
-  location:{
-    flexDirection: "row", gap: 5, alignItems: "flex-end"
-  }
+  location: {
+    flexDirection: "row",
+    gap: 5,
+    alignItems: "flex-end",
+  },
 });
