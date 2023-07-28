@@ -9,7 +9,7 @@ const MapScreen = ({ route }) => {
     <View>
       <MapView
         style={styles.mapStyle}
-        region={cords}
+        region={coords}
         mapType="standard"
         minZoomLevel={15}
       >
