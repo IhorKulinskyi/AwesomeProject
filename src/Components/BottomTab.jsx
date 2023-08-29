@@ -6,13 +6,17 @@ import {
   Octicons,
   Feather,
 } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 import ProfileScreen from "../Screens/ProfileScreen";
 import CreatePostsScreen from "../Screens/CreatePostScreen";
 import HomeScreen from "../Screens/HomeScreen";
+import { removeUser } from "~/redux/user/slice";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
+  const dispatch = useDispatch();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -42,7 +46,12 @@ const BottomTab = () => {
             paddingLeft: 20,
           },
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Login");
+                dispatch(removeUser());
+              }}
+            >
               <Feather
                 style={styles.logOutIcon}
                 name="log-out"

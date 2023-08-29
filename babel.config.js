@@ -13,6 +13,7 @@ module.exports = function (api) {
             "~/data": "./src/data",
             "~/assets": "./src/assets",
             "~/redux": "./src/redux",
+            "~/hooks": "./src/hooks",
           },
         },
       ],

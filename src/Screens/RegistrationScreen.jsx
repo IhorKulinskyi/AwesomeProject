@@ -15,10 +15,9 @@ import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "~/redux/auth/operations";
-import { selectUser } from "~/redux/auth/selectors";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "~/redux/user/slice";
 
 const RegistrationScreen = () => {
   const [visible, setVisible] = useState(false);
@@ -30,7 +29,6 @@ const RegistrationScreen = () => {
 
   const navigation = useNavigation();
 
-  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const handleKeyboardDidShow = () => {
@@ -96,9 +94,21 @@ const RegistrationScreen = () => {
       return;
     }
 
-    dispatch(register({ email, password }));
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          })
+        );
+      })
+      .catch(console.error);
     resetForm();
-    navigation.navigate("Home");
+    navigation.navigate("HomeScreen");
   };
 
   return (

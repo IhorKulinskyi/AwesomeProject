@@ -11,11 +11,13 @@ import userPhoto from "~/assets/img/User.jpg";
 import { FlatList } from "react-native-gesture-handler";
 import { postsArray } from "~/data/posts";
 import Post from "~/Components/Post";
+import { useAuth } from "~/hooks/useAuth";
 
 const HomeScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  return (
+  const { isAuth, email } = useAuth();
+  return isAuth ? (
     <View style={styles.container}>
       <View style={styles.mainContent}>
         <View style={styles.useInfo}>
@@ -30,17 +32,15 @@ const HomeScreen = () => {
             contentContainerStyle={styles.postContainer}
             data={postsArray}
             renderItem={({ item }) => (
-              <Post
-                nav={navigation}
-                postData={item}
-                route={route}
-              />
+              <Post nav={navigation} postData={item} route={route} />
             )}
             keyExtractor={(item) => item.id}
           />
         </SafeAreaView>
       </View>
     </View>
+  ) : (
+    navigation.navigate("Login")
   );
 };
 

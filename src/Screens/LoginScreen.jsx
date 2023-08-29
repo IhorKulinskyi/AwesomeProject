@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "~/redux/auth/operations";
-import { selectUser } from "~/redux/auth/selectors";
+import { useDispatch } from "react-redux";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { setUser } from "~/redux/user/slice";
 
 const LoginScreen = () => {
   const [visible, setVisible] = useState(false);
@@ -22,8 +22,6 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
-
-  const user = useSelector(selectUser);
 
   const resetForm = () => {
     setEmail("");
@@ -50,7 +48,12 @@ const LoginScreen = () => {
       return;
     }
 
-    dispatch(logIn({ email, password }));
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(console.log)
+      .catch(console.error);
+
+    // dispatch(logIn({ email, password }));
     resetForm();
     navigation.navigate("HomeScreen");
   };
