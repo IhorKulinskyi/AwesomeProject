@@ -50,12 +50,19 @@ const LoginScreen = () => {
 
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then(console.log)
-      .catch(console.error);
-
-    // dispatch(logIn({ email, password }));
-    resetForm();
-    navigation.navigate("HomeScreen");
+      .then(({ user }) => {
+        dispatch(
+          setUser({
+            id: user.uid,
+            email: user.email,
+            token: user.accessToken,
+            name: user.displayName,
+          })
+        );
+        navigation.navigate("HomeScreen");
+        resetForm();
+      })
+      .catch((e) => Alert.alert(`${e.message}`));
   };
 
   return (

@@ -14,7 +14,6 @@ import {
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { auth } from "../../firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "~/redux/user/slice";
@@ -97,18 +96,20 @@ const RegistrationScreen = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
+        user.displayName = name;
         dispatch(
           setUser({
             email: user.email,
             id: user.uid,
             token: user.accessToken,
+            name: user.displayName,
           })
         );
+        user.displayName = name;
+        navigation.navigate("HomeScreen");
+        resetForm();
       })
-      .catch(console.error);
-    resetForm();
-    navigation.navigate("HomeScreen");
+      .catch((e) => Alert.alert(`${e.message}`));
   };
 
   return (

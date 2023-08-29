@@ -48,7 +48,6 @@ const BottomTab = () => {
           headerRight: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Login");
                 dispatch(removeUser());
               }}
             >
