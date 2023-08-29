@@ -8,18 +8,18 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
-import ProfileImg from "../img/ProfileImg.jpg";
+import ProfileImg from "~/assets/img/ProfileImg.jpg";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { postsArray } from "../data/posts";
-import Post from "../Components/Post";
+import { postsArray } from "~/data/posts";
+import Post from "~/Components/Post";
 
 const ProfileScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   return (
     <ImageBackground
-      source={require("../img/login-bg.jpg")}
+      source={require("~/assets/img/login-bg.jpg")}
       resizeMode="cover"
       style={styles.image}
     >

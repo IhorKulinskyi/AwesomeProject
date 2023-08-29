@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "~/redux/auth/operations";
+import { selectUser } from "~/redux/auth/selectors";
 
 const LoginScreen = () => {
   const [visible, setVisible] = useState(false);
@@ -17,6 +20,10 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
   const resetForm = () => {
     setEmail("");
@@ -32,7 +39,7 @@ const LoginScreen = () => {
     return password.length >= 8;
   };
 
-  const handleLogIn = () => {
+  const handleLogIn = async () => {
     if (!validateEmail(email)) {
       Alert.alert("Invalid Email", "Please enter a valid email address.");
       return;
@@ -43,9 +50,8 @@ const LoginScreen = () => {
       return;
     }
 
-    // Alert.alert("Login Success", "User logedd in successfully!");
+    dispatch(logIn({ email, password }));
     resetForm();
-    console.log(`email: ${email}`);
     navigation.navigate("HomeScreen");
   };
 
@@ -56,7 +62,7 @@ const LoginScreen = () => {
       style={styles.wrapper}
     >
       <ImageBackground
-        source={require("../img/login-bg.jpg")}
+        source={require("~/assets/img/login-bg.jpg")}
         resizeMode="cover"
         style={styles.image}
       >

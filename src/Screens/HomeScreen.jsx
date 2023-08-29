@@ -7,10 +7,10 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import userPhoto from "../img/User.jpg";
+import userPhoto from "~/assets/img/User.jpg";
 import { FlatList } from "react-native-gesture-handler";
-import { postsArray } from "../data/posts";
-import Post from "../Components/Post";
+import { postsArray } from "~/data/posts";
+import Post from "~/Components/Post";
 
 const HomeScreen = () => {
   const route = useRoute();

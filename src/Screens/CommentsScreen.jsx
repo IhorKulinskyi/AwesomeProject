@@ -13,7 +13,7 @@ import {
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
-import Comment from "../Components/Comment";
+import Comment from "~/Components/Comment";
 
 const CommentsScreen = ({ route }) => {
   const { data } = route.params;

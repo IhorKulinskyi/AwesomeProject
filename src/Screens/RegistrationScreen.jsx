@@ -12,8 +12,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "~/redux/auth/operations";
+import { selectUser } from "~/redux/auth/selectors";
 
 const RegistrationScreen = () => {
   const [visible, setVisible] = useState(false);
@@ -24,6 +29,9 @@ const RegistrationScreen = () => {
   const [contentOffset, setContentOffset] = useState(0);
 
   const navigation = useNavigation();
+
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const handleKeyboardDidShow = () => {
     setContentOffset(-60);
@@ -87,10 +95,10 @@ const RegistrationScreen = () => {
       Alert.alert("Password should be at least 8 characters");
       return;
     }
-    Alert.alert("Registration Success", "User registered successfully!");
+
+    dispatch(register({ email, password }));
     resetForm();
-    console.log(`name: ${name}, email: ${email}`);
-    navigation.navigate("HomeScreen");
+    navigation.navigate("Home");
   };
 
   return (
@@ -101,7 +109,7 @@ const RegistrationScreen = () => {
         style={styles.wrapper}
       >
         <ImageBackground
-          source={require("../img/login-bg.jpg")}
+          source={require("~/assets/img/login-bg.jpg")}
           resizeMode="cover"
           style={styles.image}
         >
